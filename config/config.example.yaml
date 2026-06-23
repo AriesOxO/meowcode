@@ -1,0 +1,51 @@
+# MeowCode 配置文件
+
+# LLM 提供商配置
+llm:
+  # 当前使用的提供商: deepseek, zhipu, anthropic
+  provider: deepseek
+
+  # DeepSeek 配置
+  deepseek:
+    api_key: ""  # 或从环境变量 DEEPSEEK_API_KEY 读取
+    model: deepseek-v4-flash  # 或 deepseek-v4-pro
+    base_url: https://api.deepseek.com
+
+  # 智谱 GLM 配置（未来支持）
+  zhipu:
+    api_key: ""
+    model: glm-4-flash
+
+  # Anthropic 配置（未来支持）
+  anthropic:
+    api_key: ""
+    model: claude-sonnet-4.5
+
+# Agent 行为配置
+agent:
+  # System Prompt
+  system_prompt: |
+    You are a helpful coding assistant.
+    When you want to run a command, wrap it in ```bash-action
+    <command>
+    ```
+    When you want to read a file, wrap it in ```read-file
+    <filepath>
+    ```
+    When you want to write/edit a file, wrap it in ```write-file
+    <filepath>
+    ---
+    <content>
+    ```
+    To finish the task, use command: exit
+
+  # 最大循环次数（防止死循环）
+  max_iterations: 20
+
+  # 命令执行超时（秒）
+  command_timeout: 30
+
+# 日志配置
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  file: logs/meowcode.log
